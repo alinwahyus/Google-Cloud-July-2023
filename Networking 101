@@ -2,19 +2,19 @@ Task 4 and Task 5
 
 gcloud compute networks create taw-custom-network --subnet-mode custom
 
-gcloud compute networks subnets create subnet-us-central \
+gcloud compute networks subnets create subnet-us-west1 \
    --network taw-custom-network \
-   --region us-central1 \
+   --region us-west1 \
    --range 10.0.0.0/16
 
-gcloud compute networks subnets create subnet-europe-west \
+gcloud compute networks subnets create subnet-us-central1 \
    --network taw-custom-network \
-   --region europe-west1 \
+   --region us-central1 \
    --range 10.1.0.0/16
 
-gcloud compute networks subnets create subnet-asia-east \
+gcloud compute networks subnets create subnet-us-east1 \
    --network taw-custom-network \
-   --region asia-east1 \
+   --region us-east1 \
    --range 10.2.0.0/16
 
 gcloud compute networks subnets list \
@@ -40,18 +40,21 @@ gcloud compute firewall-rules create "nw101-allow-rdp" --allow tcp:3389 --networ
 
 
 gcloud compute instances create us-test-01 \
---subnet subnet-us-central \
---zone us-central1-a \
+--subnet subnet-us-west1 \
+--zone us-west1-c \
+--machine-type e2-standard-2 \
 --tags ssh,http,rules
 
-gcloud compute instances create europe-test-01 \
---subnet subnet-europe-west \
---zone europe-west1-b \
+gcloud compute instances create us-test-02 \
+--subnet subnet-us-central1 \
+--zone us-central1-b \
+--machine-type e2-standard-2 \
 --tags ssh,http,rules
 
-gcloud compute instances create asia-test-01 \
---subnet subnet-asia-east \
---zone asia-east1-a \
+gcloud compute instances create us-test-03 \
+--subnet subnet-us-east1 \
+--zone us-east1-d \
+--machine-type e2-standard-2 \
 --tags ssh,http,rules
 
 
